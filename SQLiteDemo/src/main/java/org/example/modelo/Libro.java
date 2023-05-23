@@ -4,7 +4,7 @@ public class Libro {
     private  String titulo;
     private String autor;
 
-    public Libro(String string, String rstString) {
+    public Libro() {
     }
 
     public Libro(int id, String titulo, String autor) {

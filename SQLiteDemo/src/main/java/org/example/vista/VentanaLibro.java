@@ -141,7 +141,10 @@ public class VentanaLibro  extends JFrame {
     public void setBtnCargar(JButton btnCargar) {
         this.btnCargar = btnCargar;
     }
-
+    public void limpiar(){
+        txtTitulo.setText("");
+        txtAutor.setText("");
+    }
     public VentanaLibro(String title) throws HeadlessException {
         super(title);
         this.setSize(800,800);
