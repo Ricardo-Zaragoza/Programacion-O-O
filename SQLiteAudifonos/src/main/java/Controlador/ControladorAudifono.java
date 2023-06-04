@@ -54,29 +54,32 @@ public class ControladorAudifono extends MouseAdapter {
                 }
             }*/
         ////////////////////////////
-       if (e.getSource() == this.view.getBtnEliminar()) {
+        if (e.getSource() == this.view.getBtnEliminar()) {
             System.out.println("Se ha presionado Eliminar");
             int index = this.view.getTblAudifono().getSelectedRow();
             if (index >= 0 && index < modelo.getRowCount()) {
-                Audifono audifono = modelo.getAudifonoAtIndex(index);
-                audifono.setNombre(this.view.getTxtNombre().getText());
-                audifono.setMarca(this.view.getTxtMarca().getText());
-                audifono.setFrecuencia(this.view.getTxtFrecuencia().getText());
-                audifono.setCancelacion_ruido(this.view.getTxtCancelacion().getText());
-                audifono.setURL(this.view.getTxtUrl().getText());
-                if (modelo.actualizarAudifono(audifono)) {
-                    modelo.cargarDatos();  // Cargar los datos después de actualizar el audífono
-                    this.view.getTblAudifono().setModel(modelo);
-                    this.view.getTblAudifono().updateUI();
-                    JOptionPane.showMessageDialog(view, "Se borro correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(view, "No se pudo borrar la base de datos. Por favor revise su conexión",
-                            "Error al borrar", JOptionPane.ERROR_MESSAGE);
+                int option = JOptionPane.showConfirmDialog(view, "esta seguro de que desea borrar el registro", "Confirmar eliminacion", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    Audifono audifono = modelo.getAudifonoAtIndex(index);
+                    audifono.setNombre("");
+                    audifono.setMarca("");
+                    audifono.setFrecuencia("");
+                    audifono.setCancelacion_ruido("");
+                    audifono.setURL("");
+                    if (modelo.actualizarAudifono(audifono)) {
+                        modelo.cargarDatos();  // Cargar los datos después de actualizar el audífono
+                        this.view.getTblAudifono().setModel(modelo);
+                        this.view.getTblAudifono().updateUI();
+                        JOptionPane.showMessageDialog(view, "Se borro correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(view, "No se pudo borrar de la base de datos. Por favor revise su conexion", "Error al borrar", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             } else {
-                JOptionPane.showMessageDialog(view, "No se ha seleccionado ningún audífono", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(view, "No se ha seleccionado ningun audífono", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+
         /*if(e.getSource() == this.view.getBtnEliminar()){
             System.out.println("Se ha presionado eliminar");
             filaSeleccionada = this.view.getTblAudifono().getSelectedRow();
